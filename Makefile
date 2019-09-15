@@ -3,7 +3,7 @@
 all: update run
 
 update: update.dummy
-update.dummy: bot.py apikey.yml Dockerfile requirements.txt
+update.dummy: bot.py api_util.py apikey.yml Dockerfile requirements.txt
 	sudo docker build --tag=saberbot .
 	touch $@
 

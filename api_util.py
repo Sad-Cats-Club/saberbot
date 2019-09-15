@@ -12,5 +12,6 @@ def send_photo(update, context, photo, caption):
     context.bot.send_photo(
         chat_id=update.message.chat_id,
         photo=photo,
-        caption=caption
+        caption=caption,
+        parse_mode="Markdown"
     )
