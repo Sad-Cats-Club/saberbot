@@ -6,3 +6,6 @@ apikey.yml
 
 # ignore pycache
 __pycache__/*
+
+# ignore dummy targets
+*.dummy
