@@ -7,7 +7,7 @@ import time
 import yaml
 
 import telegram
-from api_util import send
+from api_util import send, send_photo
 from telegram.ext import CommandHandler, Updater
 
 # get api key from config file
@@ -23,6 +23,10 @@ start_response = "Hello! Welcome to Saber Bot."
 def start(update, context):
     send(update, context, start_response)
 
+# process photo command
+def photo(update, context):
+    send_photo(update, context, "https://www.fate-sn.com/ubw/chara/img/ch02.jpg")
+
 def main():
     # create updater
     updater = Updater(token=get_apikey(), use_context=True)
@@ -35,6 +39,7 @@ def main():
 
     # add handlers
     dispatcher.add_handler(CommandHandler("start", start))
+    dispatcher.add_handler(CommandHandler("photo", photo))
 
     # start polling
     updater.start_polling()
