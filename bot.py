@@ -22,9 +22,12 @@ def get_apikey():
 
 # gets client ID and secret for praw
 def get_praw_id_secret():
-    with open("apikey.yml") as f:
-        yml = yaml.safe_load(f)
-        return yml["client_id"], yml["client_secret"]
+    try:
+        with open("apikey.yml") as f:
+            yml = yaml.safe_load(f)
+            return yml["client_id"], yml["client_secret"]
+    except: # failed to open file, try environment variables
+        return os.environ.get("client_id"), os.environ.get("client_secret")
 
 # process start command
 start_response = "Hello! Welcome to Saber Bot."
