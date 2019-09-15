@@ -1,0 +1,8 @@
+# ignore api key
+apikey.yml
+
+# vscode workspace settings
+.vscode/*
+
+# ignore pycache
+__pycache__/*
