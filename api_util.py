@@ -8,8 +8,9 @@ def send(update, context, message):
     )
 
 # sends photo
-def send_photo(update, context, photo):
+def send_photo(update, context, photo, caption):
     context.bot.send_photo(
         chat_id=update.message.chat_id,
-        photo=photo
+        photo=photo,
+        caption=caption
     )
