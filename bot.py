@@ -2,6 +2,7 @@ import atexit
 import json
 import logging
 import os
+import random
 import time
 
 import yaml
@@ -32,9 +33,21 @@ def start(update, context):
 
 # process photo command
 def photo(update, context):
-    send_photo(update, context, "https://www.fate-sn.com/ubw/chara/img/ch02.jpg")
+    send_photo(update, context, get_pic())
+
+# get picture from reddit
+def get_pic():
+    # get r/Saber
+    sub = reddit.subreddit("saber")
+    posts = [post for post in sub.hot(limit=100)]
+    rng = posts[random.randint(0, 100)]
+    while rng.over_18 or rng.is_self:
+        rng = posts[random.randint(0, 100)]
+    return rng.url
 
 def main():
+    global reddit
+
     # create updater
     updater = Updater(token=get_apikey(), use_context=True)
     dispatcher = updater.dispatcher
