@@ -1,14 +1,10 @@
-import atexit
-import json
 import logging
 import os
 import random
-import time
 
 import yaml
 
 import praw
-import telegram
 from api_util import send, send_photo
 from telegram.ext import CommandHandler, Updater
 
