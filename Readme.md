@@ -1,6 +1,6 @@
 # Saber Bot
 
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/chuahou/saberbot.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/chuahou/saberbot/context:python)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/Sad-Cats-Club/saberbot.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Sad-Cats-Club/saberbot/context:python)
 
 A simple Telegram bot that sends a random non-NSFW picture from [r/Saber](https://old.reddit.com/r/Saber).
 Inspired by but not based on [doggobot](https://github.com/dzakyputra/doggobot).
