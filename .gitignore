@@ -1,14 +1,8 @@
 # ignore api key
 apikey.yml
 
-# vscode workspace settings
-.vscode/*
-
 # ignore pycache
 __pycache__/*
-
-# ignore dummy targets
-*.dummy
 
 # ignore venv
 venv/
