@@ -1,34 +1,34 @@
 import logging
 import os
 import random
-
 import yaml
 
 import praw
-from api_util import send, send_photo
 from telegram.ext import CommandHandler, Updater
+
+from api_util import send, send_photo
 
 # get api key from config file
 def get_apikey():
     try:
-        with open("apikey.yml") as f:
-            return yaml.safe_load(f)["api_key"]
+        with open("apikey.yml") as config_file:
+            return yaml.safe_load(config_file)["api_key"]
     except: # failed to open file, try environment variables
         return os.environ.get("api_key")
 
 # gets client ID and secret for praw
 def get_praw_id_secret():
     try:
-        with open("apikey.yml") as f:
-            yml = yaml.safe_load(f)
+        with open("apikey.yml") as config_file:
+            yml = yaml.safe_load(config_file)
             return yml["client_id"], yml["client_secret"]
     except: # failed to open file, try environment variables
         return os.environ.get("client_id"), os.environ.get("client_secret")
 
 # process start command
-start_response = "Hello! Welcome to Saber Bot."
+START_RESPONSE = "Hello! Welcome to Saber Bot."
 def start(update, context):
-    send(update, context, start_response)
+    send(update, context, START_RESPONSE)
 
 # process photo command
 def photo(update, context):
@@ -39,11 +39,12 @@ def photo(update, context):
 def get_pic():
     # get r/Saber
     sub = reddit.subreddit("saber")
-    posts = [post for post in sub.hot(limit=100)]
+    posts = list(sub.hot(limit=100))
     rng = posts[random.randint(0, 100)]
     while rng.over_18 or rng.is_self:
         rng = posts[random.randint(0, 100)]
-    return rng.url, rng.title + " | \[ [Link](reddit.com" + rng.permalink + ") ]"
+    return rng.url, rng.title + \
+            r" | \[ [Link](reddit.com" + rng.permalink + ") ]"
 
 def main():
     global reddit
@@ -54,7 +55,9 @@ def main():
 
     # create praw instance
     client_id, client_secret = get_praw_id_secret()
-    reddit = praw.Reddit(client_id=client_id, client_secret=client_secret,
+    reddit = praw.Reddit(
+        client_id=client_id,
+        client_secret=client_secret,
         user_agent="ch_saberbot")
 
     # set up logging
