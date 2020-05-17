@@ -8,6 +8,9 @@ from telegram.ext import CommandHandler, Updater
 
 from api_util import send, send_photo
 
+# global reddit instance
+reddit = None # pylint: disable-msg=C0103
+
 # get api key from config file
 def get_apikey():
     try:
@@ -38,6 +41,9 @@ def photo(update, context):
 # get picture from reddit
 def get_pic():
     # get r/Saber
+    if reddit == None:
+        logging.error("Reddit instance not initialised!")
+        quit()
     sub = reddit.subreddit("saber")
     posts = list(sub.hot(limit=100))
     rng = posts[random.randint(0, 100)]
@@ -47,7 +53,7 @@ def get_pic():
             r" | \[ [Link](reddit.com" + rng.permalink + ") ]"
 
 def main():
-    global reddit
+    global reddit # pylint: disable=C0103
 
     # create updater
     updater = Updater(token=get_apikey(), use_context=True)
