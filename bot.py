@@ -12,7 +12,7 @@ from telegram.ext import CommandHandler, Updater
 def get_apikey():
     try:
         with open("apikey.yml") as f:
-            return yaml.safe_load(f)["api-key"]
+            return yaml.safe_load(f)["api_key"]
     except: # failed to open file, try environment variables
         return os.environ.get("api_key")
 
