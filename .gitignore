@@ -9,3 +9,6 @@ __pycache__/*
 
 # ignore dummy targets
 *.dummy
+
+# ignore venv
+venv/
