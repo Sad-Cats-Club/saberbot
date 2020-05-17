@@ -41,9 +41,9 @@ def photo(update, context):
 # get picture from reddit
 def get_pic():
     # get r/Saber
-    if reddit == None:
+    if reddit is None:
         logging.error("Reddit instance not initialised!")
-        quit()
+        os.sys.exit()
     sub = reddit.subreddit("saber")
     posts = list(sub.hot(limit=100))
     rng = posts[random.randint(0, 100)]
@@ -53,7 +53,7 @@ def get_pic():
             r" | \[ [Link](reddit.com" + rng.permalink + ") ]"
 
 def main():
-    global reddit # pylint: disable=C0103
+    global reddit # pylint: disable=C0103, W0603
 
     # create updater
     updater = Updater(token=get_apikey(), use_context=True)

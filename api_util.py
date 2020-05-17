@@ -8,7 +8,7 @@ def send(update, context, message):
         chat_id=update.message.chat_id,
         text=message
     )
-    logging.info("Sent message " + message)
+    logging.info("Sent message %s", message)
 
 # sends photo
 def send_photo(update, context, photo, caption):
@@ -18,4 +18,4 @@ def send_photo(update, context, photo, caption):
         caption=caption,
         parse_mode="Markdown"
     )
-    logging.info("Sent photo with caption " + caption)
+    logging.info("Sent photo with caption %s", caption)
