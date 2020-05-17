@@ -30,6 +30,9 @@ Install dependencies using pip:
 
 	pip3 install -r requirements.txt
 
-Run the bot:
+Now, add secrets by first copying `apikey.yml.dist` to `apikey.yml`. Then, fill
+in the blanks using the secrets above.
+
+Lastly, run the bot:
 
 	python3 bot.py
