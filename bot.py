@@ -54,7 +54,9 @@ def main():
 
     # create praw instance
     client_id, client_secret = get_praw_id_secret()
-    reddit = praw.Reddit(client_id=client_id, client_secret=client_secret,
+    reddit = praw.Reddit(
+        client_id=client_id,
+        client_secret=client_secret,
         user_agent="ch_saberbot")
 
     # set up logging
