@@ -1,34 +1,34 @@
 import logging
 import os
 import random
-
 import yaml
 
 import praw
-from api_util import send, send_photo
 from telegram.ext import CommandHandler, Updater
+
+from api_util import send, send_photo
 
 # get api key from config file
 def get_apikey():
     try:
-        with open("apikey.yml") as f:
-            return yaml.safe_load(f)["api_key"]
+        with open("apikey.yml") as config_file:
+            return yaml.safe_load(config_file)["api_key"]
     except: # failed to open file, try environment variables
         return os.environ.get("api_key")
 
 # gets client ID and secret for praw
 def get_praw_id_secret():
     try:
-        with open("apikey.yml") as f:
-            yml = yaml.safe_load(f)
+        with open("apikey.yml") as config_file:
+            yml = yaml.safe_load(config_file)
             return yml["client_id"], yml["client_secret"]
     except: # failed to open file, try environment variables
         return os.environ.get("client_id"), os.environ.get("client_secret")
 
 # process start command
-start_response = "Hello! Welcome to Saber Bot."
+START_RESPONSE = "Hello! Welcome to Saber Bot."
 def start(update, context):
-    send(update, context, start_response)
+    send(update, context, START_RESPONSE)
 
 # process photo command
 def photo(update, context):
