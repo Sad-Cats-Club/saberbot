@@ -43,7 +43,8 @@ def get_pic():
     rng = posts[random.randint(0, 100)]
     while rng.over_18 or rng.is_self:
         rng = posts[random.randint(0, 100)]
-    return rng.url, rng.title + " | \[ [Link](reddit.com" + rng.permalink + ") ]"
+    return rng.url, rng.title + \
+            r" | \[ [Link](reddit.com" + rng.permalink + ") ]"
 
 def main():
     global reddit
