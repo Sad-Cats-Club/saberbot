@@ -11,21 +11,24 @@ from api_util import send, send_photo
 # global reddit instance
 reddit = None # pylint: disable-msg=C0103
 
+# configuration file path
+APIKEY_YML_PATH = "apikey.yml"
+
 # get api key from config file
 def get_apikey():
-    try:
-        with open("apikey.yml") as config_file:
+    if os.path.exists(APIKEY_YML_PATH):
+        with open(APIKEY_YML_PATH) as config_file:
             return yaml.safe_load(config_file)["api_key"]
-    except: # failed to open file, try environment variables
+    else: # no config file, try environment variables
         return os.environ.get("api_key")
 
 # gets client ID and secret for praw
 def get_praw_id_secret():
-    try:
-        with open("apikey.yml") as config_file:
+    if os.path.exists(APIKEY_YML_PATH):
+        with open(APIKEY_YML_PATH) as config_file:
             yml = yaml.safe_load(config_file)
             return yml["client_id"], yml["client_secret"]
-    except: # failed to open file, try environment variables
+    else: # no config file, try environment variables
         return os.environ.get("client_id"), os.environ.get("client_secret")
 
 # process start command
