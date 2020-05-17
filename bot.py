@@ -11,6 +11,9 @@ from api_util import send, send_photo
 # configuration file path
 APIKEY_YML_PATH = "apikey.yml"
 
+# global reddit instance
+reddit = None # pylint: disable-msg=C0103
+
 # get api key from config file
 def get_apikey():
     if os.path.exists(APIKEY_YML_PATH):
@@ -41,6 +44,9 @@ def photo(update, context):
 # get picture from reddit
 def get_pic():
     # get r/Saber
+    if reddit is None:
+        logging.error("Reddit instance not initialised!")
+        os.sys.exit()
     sub = reddit.subreddit("saber")
     posts = list(sub.hot(limit=100))
     rng = posts[random.randint(0, 100)]
@@ -50,7 +56,7 @@ def get_pic():
             r" | \[ [Link](reddit.com" + rng.permalink + ") ]"
 
 def main():
-    global reddit
+    global reddit # pylint: disable=C0103, W0603
 
     # create updater
     updater = Updater(token=get_apikey(), use_context=True)
