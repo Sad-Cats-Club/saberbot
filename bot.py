@@ -39,7 +39,7 @@ def photo(update, context):
 def get_pic():
     # get r/Saber
     sub = reddit.subreddit("saber")
-    posts = [post for post in sub.hot(limit=100)]
+    posts = list(sub.hot(limit=100))
     rng = posts[random.randint(0, 100)]
     while rng.over_18 or rng.is_self:
         rng = posts[random.randint(0, 100)]
