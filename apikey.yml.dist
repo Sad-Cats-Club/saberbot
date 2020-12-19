@@ -1,5 +1,5 @@
 # Fill in your api key below and remove .dist from the filename
 
-api-key: # Your api key here
+api_key: # Your api key here
 client_id: # Reddit client ID here
 client_secret: # Reddit client secret here
