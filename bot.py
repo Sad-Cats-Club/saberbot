@@ -17,7 +17,7 @@ reddit = None # pylint: disable-msg=C0103
 # get api key from config file
 def get_apikey():
     if os.path.exists(APIKEY_YML_PATH):
-        with open(APIKEY_YML_PATH) as config_file:
+        with open(APIKEY_YML_PATH, encoding="utf-8") as config_file:
             return yaml.safe_load(config_file)["api_key"]
     else: # no config file, try environment variables
         return os.environ.get("api_key")
@@ -25,7 +25,7 @@ def get_apikey():
 # gets client ID and secret for praw
 def get_praw_id_secret():
     if os.path.exists(APIKEY_YML_PATH):
-        with open(APIKEY_YML_PATH) as config_file:
+        with open(APIKEY_YML_PATH, encoding="utf-8") as config_file:
             yml = yaml.safe_load(config_file)
             return yml["client_id"], yml["client_secret"]
     else: # no config file, try environment variables
