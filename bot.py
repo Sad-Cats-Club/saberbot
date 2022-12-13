@@ -49,9 +49,9 @@ def get_pic():
         os.sys.exit()
     sub = reddit.subreddit("saber")
     posts = list(sub.hot(limit=100))
-    rng = posts[random.randint(0, 100)]
+    rng = posts[random.randint(0, 99)]
     while rng.over_18 or rng.is_self:
-        rng = posts[random.randint(0, 100)]
+        rng = posts[random.randint(0, 99)]
     return rng.url, rng.title + \
             r" | \[ [Link](reddit.com" + rng.permalink + ") ]"
 
