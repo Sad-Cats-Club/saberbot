@@ -4,7 +4,7 @@ import random
 import yaml
 
 import praw
-from telegram.ext import CommandHandler, Updater
+from telegram.ext import CommandHandler, Application
 
 from api_util import send, send_photo
 
@@ -33,13 +33,13 @@ def get_praw_id_secret():
 
 # process start command
 START_RESPONSE = "Hello! Welcome to Saber Bot."
-def start(update, context):
-    send(update, context, START_RESPONSE)
+async def start(update, context):
+    await send(update, context, START_RESPONSE)
 
 # process photo command
-def photo(update, context):
+async def photo(update, context):
     url, caption = get_pic()
-    send_photo(update, context, url, caption)
+    await send_photo(update, context, url, caption)
 
 # get picture from reddit
 def get_pic():
@@ -58,9 +58,8 @@ def get_pic():
 def main():
     global reddit # pylint: disable=C0103, W0603
 
-    # create updater
-    updater = Updater(token=get_apikey(), use_context=True)
-    dispatcher = updater.dispatcher
+    # create application
+    application = Application.builder().token(get_apikey()).build()
 
     # create praw instance
     client_id, client_secret = get_praw_id_secret()
@@ -75,11 +74,11 @@ def main():
         level=logging.INFO)
 
     # add handlers
-    dispatcher.add_handler(CommandHandler("start", start))
-    dispatcher.add_handler(CommandHandler("photo", photo))
+    application.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("photo", photo))
 
     # start polling
-    updater.start_polling()
+    application.run_polling()
 
 if __name__ == "__main__":
     main()

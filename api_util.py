@@ -3,16 +3,16 @@
 import logging
 
 # sends message
-def send(update, context, message):
-    context.bot.send_message(
+async def send(update, context, message):
+    await context.bot.send_message(
         chat_id=update.message.chat_id,
         text=message
     )
     logging.info("Sent message %s", message)
 
 # sends photo
-def send_photo(update, context, photo, caption):
-    context.bot.send_photo(
+async def send_photo(update, context, photo, caption):
+    await context.bot.send_photo(
         chat_id=update.message.chat_id,
         photo=photo,
         caption=caption,
